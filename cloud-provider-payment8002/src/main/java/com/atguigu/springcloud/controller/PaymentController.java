@@ -14,6 +14,9 @@ import javax.annotation.Resource;
 @Slf4j
 public class PaymentController {
 
+    @Value("${server.port}")
+    private String serverPort;
+
     @Resource
     private PaymentService paymentService;
 
@@ -50,5 +53,10 @@ public class PaymentController {
         }else{
             return new CommonResult(500,"查询失败",null);
         }
+    }
+
+    @GetMapping(value = "/payment/lb")
+    public String getPaymentLB() {
+        return serverPort;
     }
 }
